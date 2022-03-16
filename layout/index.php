@@ -12,8 +12,8 @@
     $qr = "select User.*,post.* from post inner join user on post.User_id = User.Id where Post.Status = 1 order by Post.Id DESC";
     $post = executeResult($qr);
     $date = Date('Y-m-d');
-    $sqlblog = "select * from blog Where Title like '%SỐ CA MẮC COVID Ngày%' order by Created_at DESC limit 2";
-    $dtblog = executeResult($sqlblog);
+    $qrblog = "select * from blog Where Title like '%SỐ CA MẮC COVID Ngày%' order by Created_at DESC limit 2";
+    $dtblog = executeResult($qrblog);
 
 ?>
 <div class="container-fluid">
