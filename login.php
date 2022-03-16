@@ -51,6 +51,7 @@
 <body>
     <form action="" class="form-login" method="post" style="height:450px">
         <h1 style="margin-bottom:10px;">Đăng nhập</h1> 
+        <h6 class="text-danger" style="text-align:center;"><?=$mess?></h6>
         <div class="txtb">
             <input type="email" placeholder="Email" name="email" require="true">
         </div>
