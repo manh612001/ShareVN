@@ -10,6 +10,12 @@
     $data = executeResult($sql1);
     $qr = "select User.*,post.* from post inner join user on post.User_id = User.Id where Post.Status = 1  and Post.Content like '%$key%'";
     $post = executeResult($qr);
+    $qr1 = "select count(*) as total from post where Content like '%$key%' "; 
+    $count = executeResult($qr1);
+    
+    foreach($count as $value){
+      $sl = $value['total'];
+    }
     if (strtolower($role) == 'admin'){
         require_once('./layoutAdmin/header.php');
     }
@@ -20,22 +26,13 @@
     <div class="col-md-3" style="background: rgb(141 177 249)"></div>
     <div class="col-md-7" style="background: rgb(244 245 247)">
         <?php
+            if($sl>0){
             foreach($post as $value){
               echo'
                 <div class="mb-2">
                     <div class="media border p-3">
                       <img src="./upload/images.png" class="mr-3 mt-1 rounded-circle" style="width:60px; height:60px;">
                         <div class="media-body">
-                          <div class="dropdown  float-right">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown"></button>
-                                <div class="dropdown-menu">
-                                  <a href ="editpost.php?id='.$value['Id'].'"><button  class="dropdown-item  ">Chỉnh sửa</button></a>
-                                  <form method= "post">
-                                    <input type="hidden" value="'.$value['Id'].'" name = "Id-post"</input>
-                                    <button type ="submit"class="dropdown-item ">Xoá</button>
-                                  </form>
-                                </div>
-                          </div>
                           <h4>'.$value['Name'].'</h4>
                           <h6><small><i>Ngày đăng: '.$value['Created_at'].'</i></small></h6>
                           <p style="font-size:30px;">'.$value['Content'].'</p>
@@ -70,6 +67,9 @@
                         </div>
                     </div>
                 </div>';
+            }}
+            else{
+              echo'<h1>Không có kết quả nào!</h1>';
             }
             ?>
           </div>
