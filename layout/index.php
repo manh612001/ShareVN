@@ -38,18 +38,11 @@
         <div class="row" style="min-height:200vh;">
           <div class="col-md-3" style="background: rgb(141 177 249)"></div>
           <div class="col-md-7" style="background: rgb(244 245 247)">
-            <div
-              style="
-                margin: 15px auto;
-                width: 90%;
-                padding: 15px;
-                border: 2px solid black;
-                border-radius: 10px;
-              "
-            >
+            <div style="margin: 15px auto;width: 90%;padding: 15px;border: 2px solid black;border-radius: 10px;">
               <div id="box-icon">
                 <i class="fa-solid fa-user-large" id="icon-avatar"></i>
               </div>
+      
               <button
                 type="button"
                 class="btn"
