@@ -18,7 +18,26 @@
             case 'delblog':
                 DelBlog();
                 break;
+            case 'delpost':
+                DelPost();
+                break;
+            case 'add':
+                Add();
+                break;
+            case 'del':
+                Del();
+                break;
         }
+    }
+    function Del(){
+        $id = getPOST('id');
+        $sql = "update user set Role = 'user' where Id = '$id'";
+        execute($sql);
+    }
+    function Add(){
+        $id = getPOST('id');
+        $sql = "update user set Role = 'admin' where Id = '$id'";
+        execute($sql);
     }
     function DelBlog(){
         $id = getPOST('id');
@@ -27,6 +46,13 @@
     }
     function Delete(){
         $id = getPOST('id');
+        $sql="delete from post where Id = $id";
+        execute($sql);
+    }
+    function DelPost(){
+        $id = getPOST('id');
+        $sql="delete from comments where Id_post = $id";
+        execute($sql);
         $sql="delete from post where Id = $id";
         execute($sql);
     }

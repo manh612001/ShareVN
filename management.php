@@ -43,21 +43,14 @@
                         <td>';
                         if(strtolower($value['Role'])!='admin'){
                             echo '
-                                <form method = "post">
-                                    <input type="hidden" name="add" value="'.$value['Id'].'"></input>
-                                    <button type ="submit" class="btn btn-success" onclick="reload()">Thêm Admin</button>
-                                </form>
-                            ';
+                            <button class="btn btn-primary" onclick="Add('.$value['Id'].')">Thêm Admin</button>';
                         }
                         echo'</td>
                         <td>';
                         if(strtolower($value['Role'])=='admin'){
-                            echo '
-                                <form method = "post">
-                                    <input type="hidden" name="del" value="'.$value['Id'].'"></input>
-                                    <button type ="submit" class="btn btn-warning" onclick="reload()">Gỡ Admin</button>
-                                </form>
-                            ';
+                            if($value['Id']!='1'){
+                                echo '<button type ="submit" class="btn btn-warning" onclick="Del('.$value['Id'].')">Gỡ Admin</button>';
+                            }
                         }
                         echo'</td>';
                         
@@ -67,19 +60,22 @@
         </tbody>
     </table>
 </div>
-
-<?php
-    if(!empty($_POST['add']))
-    {
-        $id = getPOST('add');
-        $sql = "update user set Role = 'admin' where Id = '$id'";
-        execute($sql);
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script> 
+    function Add(id){
+    $.post('api.php',{
+        'id': id,
+        'action':'add'
+    },function(data){
+        location.reload();
+    })
     }
-    if(!empty($_POST['del']))
-    {
-        $id2 = getPOST('del');
-        $sql2 = "update user set Role = 'user' where Id = '$id2'";
-        execute($sql2);
-    }
-    
-?>
+    function Del(id){
+    $.post('api.php',{
+        'id': id,
+        'action':'del'
+    },function(data){
+        location.reload();
+    })
+    }    
+</script>

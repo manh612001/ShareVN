@@ -90,6 +90,7 @@
                                 <button type="button" class="btn dropdown-toggle " data-toggle="dropdown"></button>
                                 <div class="dropdown-menu">
                                   <a href ="editpost.php?id='.$value['Id'].'"><button  class="dropdown-item  ">Chỉnh sửa</button></a>
+                                  <button class="dropdown-item" onclick="DelPost('.$value['Id'].')">Xoá</button>
                                 </div>
                           </div>';
                           }
@@ -137,7 +138,17 @@
     </div>
   </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script> 
+  function DelPost(id){
+    $.post('api.php',{
+        'id': id,
+        'action':'delpost'
+    },function(data){
+        location.reload();
+    })
+    }       
+</script>
 <?php
     if(!empty($_POST['content'])){
         $content = getPOST('content');
