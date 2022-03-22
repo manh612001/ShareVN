@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label for="pwd">Email:</label>
-            <input type="email" class="form-control"  name="email" value="<?=$email?>">
+            <input type="email" class="form-control"  name="email" value="<?=$email?>" readonly>
         </div>
         <div class="form-group ">
             <label for="pwd">Password:</label>
@@ -48,6 +48,7 @@
             execute($sql);
             echo"<script>alert('Lưu thành công')</script>"; 
             die(); 
+            
         }
     }
 ?>  
