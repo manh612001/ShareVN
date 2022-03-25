@@ -2,8 +2,8 @@
     session_start();
     require_once('./utils/utility.php');
     require_once('./database/dbhelper.php');
-    $user = getToken();
-    if($user== null){
+    $id = getCookie('Id');
+    if($id== null){
         die();
     }
     if(!empty($_POST)){
