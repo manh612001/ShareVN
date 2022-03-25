@@ -31,7 +31,7 @@
     }
     function Del(){
         $id = getPOST('id');
-        $sql = "update nguoidung set VaiTro = 'nguoidung' where Id = '$id'";
+        $sql = "update nguoidung set VaiTro = 'thanhvien' where Id = '$id'";
         execute($sql);
     }
     function Add(){
