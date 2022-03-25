@@ -2,15 +2,14 @@
     session_start();
     require_once('./utils/utility.php');
     require_once('./database/dbhelper.php');
-    
     $id = getGet('id');
-    
-    $user = getToken();
-    $rs = $user['Id'];
-    $role = $user['Role'];
-    $sql1 = "select user.* from user where id ='$rs'";
+    $rs = getCookie('Id');
+    $sql1 = "select * from nguoidung where Id ='$rs'";
     $data = executeResult($sql1);
-    $qr = "select User.*,post.* from post inner join user on post.User_id = User.Id where Post.Status = 1  and Post.Id = '$id'";
+    foreach($data as $value){
+        $role = $value['VaiTro'];
+    }
+    $qr = "select nguoidung.*,baiviet.* from baiviet inner join nguoidung on baiviet.Id_ND = nguoidung.Id where baiviet.TrangThai = 1  and baiviet.Id = '$id'";
     $post = executeResult($qr);
     if(strtolower($role) =="admin")
         require_once('./layoutAdmin/header.php');
@@ -23,7 +22,7 @@
                   <div class="media border p-3" >
                   <img src="./upload/images.png" class="mr-3 mt-1 rounded-circle" style="width:60px; height:60px;">
                       <div class="media-body">';
-                          if($value['User_id']==$rs)
+                          if($value['Id_ND']==$rs)
                           {
                             echo '
                                 <div class="dropdown  float-right">
@@ -34,12 +33,12 @@
                                     </div>
                                 </div>';
                           }
-                              $s = "select * from post where Id = ".$value['Id']."";
+                              $s = "select * from baiviet where Id = ".$value['Id']."";
                               $d = executeResult($s);
                       echo'    
-                          <h4>'.$value['Name'].'</h4>
-                          <h6><small><i>Ngày đăng: '.$value['Created_at'].'</i></small></h6>
-                          <p style="font-size:30px;">'.$value['Content'].'</p>
+                          <h4>'.$value['Ten'].'</h4>
+                          <h6><small><i>Ngày đăng: '.$value['NgayTao'].'</i></small></h6>
+                          <p style="font-size:30px;">'.$value['NoiDung'].'</p>
                           <div class="cmt">
                           <form  method="post" class="mb-2">
                               <div class="input-group">
@@ -51,15 +50,15 @@
                                   </div>
                               </div>
                           </form>';
-                          $cmt ="select user.Name as name,comments.Content as content from comments inner join post on comments.Id_post = post.Id inner join user on comments.Id_user = user.Id where comments.Id_post = ".$value['Id']."";
+                          $cmt ="select nguoidung.Ten as Ten,binhluan.NoiDung as NoiDung from binhluan inner join baiviet on binhluan.Id_BV = baiviet.Id inner join nguoidung on binhluan.Id_ND = nguoidung.Id where binhluan.Id_BV = ".$value['Id']."";
                           $rscmt = executeResult($cmt);
                           foreach($rscmt as $item){
                               echo '
                               <div class=" media border p-2 mb-2" style="border-radius:10px;">
                                   <img src="./upload/images.png"  class="mr-3 mt-3 rounded-circle" style="width:60px;">
                                   <div class="media-body">
-                                      <span style="font-size:24px;">'.$item['name'].'</span>
-                                      <p>'.$item['content'].'</p>
+                                      <span style="font-size:24px;">'.$item['Ten'].'</span>
+                                      <p>'.$item['NoiDung'].'</p>
                                   </div>
                             </div>' ;
                           }
@@ -77,7 +76,7 @@
             echo"<script>alert('Vui lòng điền đầy đủ thông tin')</script>";
         }
         else{
-            $sql="insert into comments (Id_post,Id_user,Content) values('$id_post','$id_user','$content')";
+            $sql="insert into binhluan (Id_BV,Id_ND,NoiDung) values('$id_post','$id_user','$content')";
             execute($sql); 
             die(); 
         }

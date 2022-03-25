@@ -4,13 +4,14 @@
     require_once('./database/dbhelper.php');
     
     $id = getGet('id');
-    $sql = "select * from blog where id = $id";
+    $sql = "select * from tintuc where id = $id";
     $dt = executeResult($sql);
-    $user = getToken();
-    $rs = $user['Id'];
-    $role = $user['Role'];
-    $sql1 = "select user.* from user where id ='$rs'";
+    $rs = getCookie('Id');
+    $sql1 = "select * from nguoidung where Id ='$rs'";
     $data = executeResult($sql1);
+    foreach($data as $value){
+        $role = $value['VaiTro'];
+    }
     if(strtolower($role) =="admin")
         require_once('./layoutAdmin/header.php');
     else
@@ -22,11 +23,11 @@
             echo '
                 
                 <div class="card">
-                    <img src="'.path($value['Img']).'" style=" width:50%; margin:10px auto;"></img>
+                    <img src="'.path($value['HinhAnh']).'" style=" width:50%; margin:10px auto;"></img>
                     <div class="card-body">
-                        <h4 style="text-align:center;" class="card-title">'.$value['Title'].'</h4>
-                        <p>Ngày đăng bài : '.$value['Created_at'].'</p>
-                        <p>'.$value['Content'].'</p>
+                        <h4 style="text-align:center;" class="card-title">'.$value['TieuDe'].'</h4>
+                        <p>Ngày đăng bài : '.$value['NgayTao'].'</p>
+                        <p>'.$value['NoiDung'].'</p>
                     </div>
                 </div>
                 

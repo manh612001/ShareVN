@@ -13,12 +13,12 @@
             echo"<script>alert('Vui lòng điền đầy đủ thông tin!')</script>";
         }
         else{
-            $userExist = executeResult("select * from user where email = '$email'",true);
+            $userExist = executeResult("select * from nguoidung where Email = '$email'",true);
             if($userExist!=null){
                 echo"<script>alert('Email đã tồn tại')</script>";
             }
             else{
-                $sql = "insert into user(Name,Email,Password,Role) values ('$name','$email','$pw','$role')";
+                $sql = "insert into nguoidung(Ten,Email,MatKhau,VaiTro) values ('$name','$email','$pw','$role')";
                 execute($sql);
                 echo"<script>alert('Đăng ký thành công')</script>";
                 

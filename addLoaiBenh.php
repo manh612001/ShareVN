@@ -13,12 +13,8 @@
 <div class="container-fluid">
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label>Tiêu đề</label>
+            <label>Tên Loại bệnh</label>
             <input type="text" class="form-control"  id="title" name="title">
-        </div>
-        <div class="form-group">
-            <label>Hình ảnh</label>
-            <input type="file" class="form-control" id="thumbnail" name="thumbnail"accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" >
         </div>
         <div class="form-group">
             <label>Nội dung</label>
@@ -30,11 +26,10 @@
 <?php
     if(!empty($_POST)){
         $title = getPOST('title');
-        $thumbnail = uploadFile('thumbnail');
         $content = getPOST('content');
         $creat_at = date('Y-m-d');
-        if(!empty($title)&&!empty($thumbnail)&&!empty($content)&&!empty($creat_at)){
-            $sql = "insert into tintuc(Id_ND,TieuDe,NoiDung,HinhAnh,NgayTao) values ('$id','$title','$content','$thumbnail','$creat_at')";
+        if(!empty($title)&&!empty($content)){
+            $sql = "insert into loaibenh(Id_ND,TenLoaiBenh,NoiDung) values ('$id','$title','$content')";
             execute($sql);
             echo"<script>alert('Thêm thành công')</script>";
             die();

@@ -2,20 +2,19 @@
   session_start();
   require_once('./utils/utility.php');
   require_once('./database/dbhelper.php');
-  $user = getToken();
-  if($user==null)
+  $id = getCookie('Id');
+  if($id==null)
   {
     header('Location:./login.php');
     die();
   }
-  $rs = $user['Id'];
-  $role = $user['Role'];
-  $sql = "select user.* from user where id ='$rs'";
+  $sql = "select * from nguoidung where id ='$id'";
   $data = executeResult($sql);
-  foreach($data as $value)
-  {
-    $name = $value['Name'];
+  foreach($data as $value){
+    $name = $value['Ten'];
+    $role = $value['VaiTro'];
   }
+  
 ?>
     <!-- header-->
     <?php 

@@ -2,14 +2,15 @@
     session_start();
     require_once('./utils/utility.php');
     require_once('./database/dbhelper.php');
-    $sql = "select User.*,post.* from post inner join user on post.User_id = User.Id where Post.status = 0";
+    $sql = "select nguoidung.*,baiviet.* from baiviet inner join nguoidung on baiviet.Id_ND = nguoidung.Id where baiviet.TrangThai = 0";
     $dt = executeResult($sql);
-    $user = getToken();
-    $rs = $user['Id'];
-    $role = $user['Role'];
-    $sql1 = "select user.* from user where id ='$rs'";
+    $id = getCookie('Id');
+    $sql1 = "select * from nguoidung where id ='$id'";
     $data = executeResult($sql1);
-    $s = "select count(*) as total from post where status = 0";
+    foreach($data as $value){
+        $role = $value['VaiTro'];
+    }
+    $s = "select count(*) as total from baiviet where TrangThai = 0";
     $d = executeResult($s);
     foreach($d as $value){
         $count = $value['total'];
@@ -29,8 +30,8 @@
                     <div class="media border p-3">
                     <img src="./upload/images.png" class="mr-3 mt-1 rounded-circle" style="width:60px; height:60px;">
                         <div class="media-body">
-                            <h4>'.$value['Name'].' <small><i>Ngày đăng '.$value['Created_at'].'</i></small></h4>
-                            <p>'.$value['Content'].'</p>
+                            <h4>'.$value['Ten'].' <small><i>Ngày đăng '.$value['NgayTao'].'</i></small></h4>
+                            <p>'.$value['NoiDung'].'</p>
                         </div>
                         <div>
                             <button onclick="Update('.$value['Id'].')"  class="btn btn-primary" >Phê duyệt</button>

@@ -3,16 +3,17 @@
     require_once('./utils/utility.php');
     require_once('./database/dbhelper.php');
     $id = getGet('id');
-    $user = getToken();
-    $role = $user['Role'];
-    $rs = $user['Id'];
-    $sql1 = "select user.* from user where id ='$rs'";
+    $rs = getCookie('Id');
+    $sql1 = "select * from nguoidung where Id ='$rs'";
     $data = executeResult($sql1);
+    foreach($data as $value){
+      $role = $value['VaiTro'];
+    }
     if(strtolower($role) =="admin")
         require_once('./layoutAdmin/header.php');
     else
         require_once('./layout/header.php');
-    $query = "select * from post where Id = '$id'";
+    $query = "select * from baiviet where Id = '$id'";
     $rs_post = executeResult($query);
 ?>
 <div >
@@ -29,7 +30,7 @@
         <form method = "post">
             <?php
                 foreach($rs_post as $item){
-                    echo'<textarea class="form-control" name ="content" style="min-height:200px;">'.$item['Content'].'</textarea>';
+                    echo'<textarea class="form-control" name ="content" style="min-height:200px;">'.$item['NoiDung'].'</textarea>';
                 }
             ?>
             <div class="modal-footer">
@@ -47,7 +48,7 @@
             echo"<script>alert('Vui lòng điền đầy đủ thông tin')</script>";
         }
         else{
-            $sql="update post set Content = '$content' where Id='$id'";
+            $sql="update baiviet set NoiDung = '$content' where Id='$id'";
             execute($sql);
             echo"<script>alert('Lưu thành công')</script>"; 
             die(); 

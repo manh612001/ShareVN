@@ -26,39 +26,39 @@
                 break;
             case 'del':
                 Del();
-                break;
+                break;     
         }
     }
     function Del(){
         $id = getPOST('id');
-        $sql = "update user set Role = 'user' where Id = '$id'";
+        $sql = "update nguoidung set VaiTro = 'nguoidung' where Id = '$id'";
         execute($sql);
     }
     function Add(){
         $id = getPOST('id');
-        $sql = "update user set Role = 'admin' where Id = '$id'";
+        $sql = "update nguoidung set VaiTro = 'admin' where Id = '$id'";
         execute($sql);
     }
     function DelBlog(){
         $id = getPOST('id');
-        $sql="delete from blog where Id = $id";
+        $sql="delete from tintuc where Id = $id";
         execute($sql);
     }
     function Delete(){
         $id = getPOST('id');
-        $sql="delete from post where Id = $id";
+        $sql="delete from baiviet where Id = $id";
         execute($sql);
     }
     function DelPost(){
         $id = getPOST('id');
-        $sql="delete from comments where Id_post = $id";
+        $sql="delete from binhluan where Id_BV = $id";
         execute($sql);
-        $sql="delete from post where Id = $id";
+        $sql="delete from baiviet where Id = $id";
         execute($sql);
     }
     function update() {
         $id = getPost('id');
-        $sql = "update post set Status = 1 where Id = $id";
+        $sql = "update baiviet set TrangThai = 1 where Id = $id";
         execute($sql);
     }
 ?>

@@ -41,16 +41,15 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="index.php"
-                >News Feed <span class="sr-only">(current)</span></a
+                >Bài Viết <span class="sr-only">(current)</span></a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="blog.php">Blog</a>
+              <a class="nav-link" href="blog.php">Tin Tức</a>
             </li>
-            <form class="form-inline" method="post" action="search.php">
-              <input class="form-control mr-sm-2" type="text" name  = "search" placeholder="Tìm kiếm...">
-              <button class="btn btn-info" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
+            <li class="nav-item">
+              <a class="nav-link" href="loaibenh.php">Loại bệnh</a>
+            </li>
           </ul>
           
           
@@ -59,15 +58,15 @@
                 <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php
                       foreach($data as $value){
-                        echo'<i class="fa-solid fa-user"></i> '.$value['Name'].'';
+                        echo'<i class="fa-solid fa-user"></i> '.$value['Ten'].'';
                       }
                     ?>
                 </span>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="info.php">Profile</a>
-                  <a class="dropdown-item" href="editprofile.php">Edit Profile</a>
+                  <a class="dropdown-item" href="info.php">Hồ Sơ</a>
+                  <a class="dropdown-item" href="editprofile.php">Chỉnh sửa hồ sơ</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="logout.php">Sign Out</a>
+                  <a class="dropdown-item" href="logout.php">Đăng xuất</a>
                 </div>
             </div>
           

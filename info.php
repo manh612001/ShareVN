@@ -2,11 +2,12 @@
     session_start();
     require_once('./utils/utility.php');
     require_once('./database/dbhelper.php');
-    $user = getToken();
-    $rs = $user['Id'];
-    $role = $user['Role'];
-    $sql = "select * from User where Id ='$rs'";
+    $id = getCookie('Id');
+    $sql = "select nguoidung.* from nguoidung where Id ='$id'";
     $data = executeResult($sql);
+    foreach($data as $value){
+        $role = $value['VaiTro'];
+    }
     if(strtolower($role)=='admin'){
         require_once('./layoutAdmin/header.php');
     }
@@ -31,10 +32,10 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>'.$value['Name'].'</td>
-                    <td>'.$value['Password'].'</td>
+                    <td>'.$value['Ten'].'</td>
+                    <td>'.$value['MatKhau'].'</td>
                     <td>'.$value['Email'].'</td>
-                    <td>'.$value['Role'].'</td>
+                    <td>'.$value['VaiTro'].'</td>
                     
                 </tr>
             </tbody>

@@ -2,14 +2,15 @@
     session_start();
     require_once('./utils/utility.php');
     require_once('./database/dbhelper.php');
-    $user = getToken();
-    $rs = $user['Id'];
-    $role = $user['Role'];
-    $name = $user['Name'];
-    $pw = $user['Password'];
-    $email = $user['Email'];
-    $sql = "select * from User where Id ='$rs'"; 
+    $rs = getCookie('Id');
+    $sql = "select * from nguoidung where Id ='$rs'"; 
     $data = executeResult($sql);
+    foreach($data as $value){
+        $role = $value['VaiTro'];
+        $name = $value['Ten'];
+        $pw = $value['MatKhau'];
+        $email = $value['Email'];
+    }
     if(strtolower($role)=='admin'){
         require_once('./layoutAdmin/header.php');
     }
@@ -44,7 +45,7 @@
             echo"<script>alert('Vui lòng điền đầy đủ thông tin')</script>";
         }
         else{
-            $sql="update user set Name = '$name',Email = '$email',Password='$pw' where Id='$rs'";
+            $sql="update nguoidung set Ten = '$name',Email = '$email',MatKhau='$pw' where Id='$rs'";
             execute($sql);
             echo"<script>alert('Lưu thành công')</script>"; 
             die(); 

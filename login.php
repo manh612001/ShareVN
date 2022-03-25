@@ -2,7 +2,7 @@
     session_start();
     require_once('./utils/utility.php');
     require_once('./database/dbhelper.php');
-    $user = getToken();
+    $user = getCookie('Id');
     if($user!=null) {
         header('Location:/');
         die();
@@ -12,19 +12,16 @@
     if(!empty($_POST)){
     $email = getPOST('email');
     $password = getPOST('password');
-    $sql = "select * from user where Email = '$email' and Password = '$password'";
+    $sql = "select * from nguoidung where Email = '$email' and MatKhau = '$password'";
     $userExist = executeResult($sql,true);
     if($userExist == null){
         $mess = "Sai email hoặc mật khẩu!";
     }
     else{
-        $token = $userExist['email'].time();
-        setcookie('token',$token,time()+1*24*60*60,'/');
+        $Id = $userExist['Id'];
+        setcookie('Id',$Id,time()+1*24*60*60,'/');
         $UserId = $userExist['id'];
         $_SESSION['user'] = $userExist;
-        $Date_at = date('Y-m-d H:i:s');
-        $sql = "insert into token (Id_user,Token,Date_at) values('$UserId','$token','$Date_at')";
-        execute($sql);
         header('Location:./');
         die();
     }
