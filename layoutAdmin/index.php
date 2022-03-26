@@ -56,7 +56,7 @@
                     <div class="media border p-3">
                       <img src="./upload/images.png" class="mr-3 mt-1 rounded-circle" style="width:60px; height:60px;">
                         <div class="media-body">';
-                          if($value['Id_ND']==$rs){
+                          if(strtolower($role)=='admin'){
                           echo'
                           <div class="dropdown  float-right">
                                 <button type="button" class="btn dropdown-toggle " data-toggle="dropdown"></button>
