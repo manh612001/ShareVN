@@ -19,9 +19,8 @@
     }
     else{
         $Id = $userExist['Id'];
-        setcookie('Id',$Id,time()+1*24*60*60,'/');
+        setcookie('Id',$Id,time()+(86400),'/');
         $UserId = $userExist['id'];
-        $_SESSION['user'] = $userExist;
         header('Location:./');
         die();
     }
