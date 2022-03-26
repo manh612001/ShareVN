@@ -14,14 +14,7 @@ function getPOST($key){
     }
     return trim($value);
 }
-function getRequest($key){
-    $value = '';
-    if(isset($_REQUEST[$key])){
-        $value = $_REQUEST[$key];
-        
-    }
-    return trim($value);
-}
+
 function getCookie($key){
     $value = '';
     if(isset($_COOKIE[$key])){

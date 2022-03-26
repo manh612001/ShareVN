@@ -24,10 +24,10 @@ function executeResult($sql, $isSingle = false)
 
     $resultset = mysqli_query($conn, $sql);
     if ($isSingle) {
-        $data = mysqli_fetch_array($resultset,1); // lấy 1 bản ghi 
+        $data = mysqli_fetch_array($resultset); // lấy 1 bản ghi 
     } else {
         $data = [];
-        while (($row = mysqli_fetch_array($resultset,1)) != null) {  // lấy nhiều hơn 1 bản ghi 
+        while (($row = mysqli_fetch_array($resultset)) != null) {  // lấy nhiều hơn 1 bản ghi 
             $data[] = $row;
         }
     }
